@@ -5,8 +5,13 @@ const fetch = require('node-fetch');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID || '4cdee2db405f4e978c9c8f05055a7cb8';
-const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET || '6547787c63734cd8bcd61943885b122e';
+const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
+const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
+
+if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET) {
+  console.error('SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET must be set');
+  process.exit(1);
+}
 
 app.use(cors());
 app.use(express.json());
